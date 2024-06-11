@@ -18,6 +18,6 @@ class RecyclerAdapter(private val horoscopeList: List<Horoscope>): RecyclerView.
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = horoscopeList[position]
         holder.textView.text = item.name
-        holder.descTextView
+        holder.imageView.setImageResource(item.logo)
     }
 }

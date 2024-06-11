@@ -12,14 +12,14 @@ class MainActivity : AppCompatActivity() {
         Horoscope("aries", "Aries", 0),
         Horoscope("taurus", "Taurus", 0),
         Horoscope("gemini", "Gemini", 0),
-        Horoscope("cancer", "Cancer", 0),
+        Horoscope("cancer", "Cancer", R.mipmap.ic_cancer_foreground),
         Horoscope("leo", "Leo", 0),
         Horoscope("virgo", "Virgo", 0),
         Horoscope("libra", "Libra", 0),
         Horoscope("scorpio", "Scorpio", 0),
         Horoscope("sagittarius", "Sagittarius", 0),
         Horoscope("capricorn", "Capricorn", 0),
-        Horoscope("aquarius", "Aquarius", 0),
+        Horoscope("aquarius", "Aquarius", R.mipmap.ic_aquarius_foreground),
         Horoscope("pisces", "Pisces", 0)
     )
     override fun onCreate(savedInstanceState: Bundle?) {
