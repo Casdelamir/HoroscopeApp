@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView
+    android:id="@+id/card_horoscope"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
@@ -10,7 +11,9 @@
     android:layout_marginLeft="10dp"
     android:layout_marginRight="10dp"
     app:cardCornerRadius="15dp"
-    app:cardElevation="20dp">
+    app:cardElevation="20dp"
+    android:clickable="true"
+    android:focusable="true">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -20,14 +23,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:srcCompat="@mipmap/ic_aquarius_foreground"
-
+        android:layout_weight="1"
         />
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:gravity="center"
-        android:layout_weight="1">
+        android:layout_weight="2">
     <TextView
         android:id="@+id/horoscope_title"
         android:layout_width="match_parent"
