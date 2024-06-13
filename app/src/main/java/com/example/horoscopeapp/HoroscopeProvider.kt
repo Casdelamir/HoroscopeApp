@@ -1,6 +1,7 @@
 package com.example.horoscopeapp
-
-class HoroscopeList {
+//singleton class (have only one instance)
+class HoroscopeProvider {
+    //all variables and functions in companion object are static
     companion object {
         private val horoscopeList: List<Horoscope> = listOf(
             Horoscope(
@@ -76,12 +77,15 @@ class HoroscopeList {
                 R.string.horoscope_date_pisces
             )
         )
-    }
-    fun getHoroscopeList() : List<Horoscope> {
-        return horoscopeList
-    }
+        fun getHoroscopeList() : List<Horoscope> {
+            return horoscopeList
+        }
 
-    fun getHoroscopeById(id: String?): Horoscope? {
-        return horoscopeList.find { h -> h.id == id }
+        fun getHoroscopeById(id: String): Horoscope {
+            //"it" represent each object in the list (it is horoscope object)
+            //it is the same like {h -> h.id == id}
+            return horoscopeList.find { it.id == id }!!
+            //!! means that the returned object is not null and will exist
+        }
     }
 }
