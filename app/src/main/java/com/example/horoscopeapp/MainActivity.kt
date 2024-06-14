@@ -1,16 +1,20 @@
 package com.example.horoscopeapp
 
 import android.content.Intent
+import android.media.RouteListingPreference.Item
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import androidx.appcompat.view.menu.MenuView.ItemView
+import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
 
 class MainActivity : AppCompatActivity() {
+    lateinit var adapter: RecyclerAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         lateinit var recyclerView: RecyclerView
@@ -21,7 +25,7 @@ class MainActivity : AppCompatActivity() {
 
         recyclerView = findViewById(R.id.recyclerView)
 
-        val adapter = RecyclerAdapter(horoscopeList) { position ->
+        adapter = RecyclerAdapter(horoscopeList) { position ->
             navigateToDailyHoroscope(horoscopeList[position])
         }
 
@@ -30,18 +34,26 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.option_menu, menu)
-        return super.onCreateOptionsMenu(menu)
-    }
+        menuInflater.inflate(R.menu.menu_search, menu)
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when(item.itemId) {
-            R.id.menu_search -> {
-                Log.i("MENU", "Search is selected")
-                true
+        val searchViewItem = menu?.findItem(R.id.menu_search)
+        val searchView = searchViewItem?.actionView as SearchView
+
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return false
             }
-            else -> super.onOptionsItemSelected(item)
-        }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                return if (newText != null) {
+                    val horoscopeList = HoroscopeProvider.getAllHoroscopesByIdStartingWithTheGivenInput(newText)
+                    adapter.updateDataSet(horoscopeList)
+                    true
+                } else false
+            }
+        })
+
+        return super.onCreateOptionsMenu(menu)
     }
     fun navigateToDailyHoroscope(horoscope: Horoscope) {
         val intent = Intent(this, DailyHoroscope::class.java)

@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import android.content.Context
 import android.content.DialogInterface.OnClickListener
 
-class RecyclerAdapter(private val horoscopeList: List<Horoscope>, private val onClickListener: (Int) -> Unit): RecyclerView.Adapter<ViewHolder>() {
+class RecyclerAdapter(private var horoscopeList: List<Horoscope>, private val onClickListener: (Int) -> Unit): RecyclerView.Adapter<ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.item_horoscope_list, parent, false)
@@ -27,5 +27,10 @@ class RecyclerAdapter(private val horoscopeList: List<Horoscope>, private val on
         holder.card.setOnClickListener {
             onClickListener(position)
         }
+    }
+
+    fun updateDataSet(horoscopeList: List<Horoscope>) {
+        this.horoscopeList = horoscopeList
+        notifyDataSetChanged()
     }
 }

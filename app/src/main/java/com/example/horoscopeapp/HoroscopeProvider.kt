@@ -87,5 +87,8 @@ class HoroscopeProvider {
             return horoscopeList.find { it.id == id }!!
             //!! means that the returned object is not null and will exist
         }
+        fun getAllHoroscopesByIdStartingWithTheGivenInput (input: String): List<Horoscope> {
+            return horoscopeList.filter { h -> h.id.startsWith(input, true) }
+        }
     }
 }

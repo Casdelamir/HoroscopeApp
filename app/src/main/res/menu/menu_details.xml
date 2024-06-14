@@ -1,25 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:tools="http://schemas.android.com/tools"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    <item
-        android:id="@+id/menu_search"
-        android:title="Search"
-        android:icon="@drawable/baseline_search_24"
-        app:showAsAction="always"
-        android:iconTint="@color/white"
-        />
     <item
         android:id="@+id/menu_favorite"
         android:title="Favorite"
         android:icon="@drawable/baseline_favorite_24"
         app:showAsAction="ifRoom"
-        android:iconTint="@color/white"
+        app:iconTint="@color/white"
         />
     <item
         android:id="@+id/menu_share"
         android:title="Share"
         android:icon="@drawable/baseline_share_24"
         app:showAsAction="always"
-        android:iconTint="@color/white" />
+        app:iconTint="@color/white" />
 </menu>
