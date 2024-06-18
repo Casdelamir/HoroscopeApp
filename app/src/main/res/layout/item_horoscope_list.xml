@@ -29,17 +29,31 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:gravity="center"
+        android:layout_gravity="center"
         android:layout_weight="2">
-    <TextView
-        android:id="@+id/horoscope_title"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Title"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        android:textColor="@color/teal_200"
-        android:padding="16dp"
-        android:textAlignment="center"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/favoriteImageView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/baseline_favorite_24"
+                app:tint="@color/teal_200"
+                android:scaleType="centerCrop"
+                android:layout_gravity="center"
+                android:layout_marginEnd="10dp"/>
+            <TextView
+                android:id="@+id/horoscope_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Title"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:textColor="@color/teal_200"
+                android:textAlignment="center"/>
+        </LinearLayout>
     <TextView
         android:id="@+id/horoscope_description"
         android:layout_width="match_parent"

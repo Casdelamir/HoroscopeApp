@@ -4,15 +4,27 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".DailyHoroscope"
+    tools:context=".activities.DailyHoroscopeActivity"
     android:orientation="vertical"
     android:gravity="center">
+    <androidx.cardview.widget.CardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
     <ImageView
         android:id="@+id/daily_icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:srcCompat="@mipmap/ic_aquarius_foreground"
-        />
+        android:layout_gravity="center"/>
+            <ImageButton
+                android:id="@+id/favorite_icon_button"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                app:srcCompat="@drawable/baseline_favorite_border_24"
+                android:layout_gravity="bottom|end"
+                android:background="@android:color/transparent"
+            />
+    </androidx.cardview.widget.CardView>
     <TextView
         android:id="@+id/daily_name"
         android:layout_width="match_parent"

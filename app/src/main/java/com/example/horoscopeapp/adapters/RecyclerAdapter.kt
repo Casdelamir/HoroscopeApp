@@ -1,12 +1,12 @@
-package com.example.horoscopeapp
+package com.example.horoscopeapp.adapters
 
-import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import android.content.Context
-import android.content.DialogInterface.OnClickListener
+import com.example.horoscopeapp.R
+import com.example.horoscopeapp.data.Horoscope
+import com.example.horoscopeapp.utilities.SessionManager
 
 class RecyclerAdapter(private var horoscopeList: List<Horoscope>, private val onClickListener: (Int) -> Unit): RecyclerView.Adapter<ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -26,6 +26,13 @@ class RecyclerAdapter(private var horoscopeList: List<Horoscope>, private val on
         holder.descTextView.setText(item.description)
         holder.card.setOnClickListener {
             onClickListener(position)
+        }
+
+        val favorite: Boolean = SessionManager(holder.context).isFavorite(item.id)
+        if (favorite) {
+            holder.iconFavorite.visibility = View.VISIBLE
+        }else {
+            holder.iconFavorite.visibility = View.GONE
         }
     }
 

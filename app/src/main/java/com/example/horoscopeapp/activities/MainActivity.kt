@@ -1,24 +1,25 @@
-package com.example.horoscopeapp
+package com.example.horoscopeapp.activities
 
 import android.content.Intent
-import android.media.RouteListingPreference.Item
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
-import android.view.MenuItem
-import androidx.appcompat.view.menu.MenuView.ItemView
 import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.horoscopeapp.data.Horoscope
+import com.example.horoscopeapp.data.HoroscopeProvider
+import com.example.horoscopeapp.R
+import com.example.horoscopeapp.adapters.RecyclerAdapter
 
 
 class MainActivity : AppCompatActivity() {
     lateinit var adapter: RecyclerAdapter
+    lateinit var horoscopeList: List<Horoscope>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         lateinit var recyclerView: RecyclerView
-        val horoscopeList = HoroscopeProvider.getHoroscopeList()
+        horoscopeList = HoroscopeProvider.getHoroscopeList()
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -31,6 +32,11 @@ class MainActivity : AppCompatActivity() {
 
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(this)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        adapter.updateDataSet(horoscopeList)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -46,7 +52,8 @@ class MainActivity : AppCompatActivity() {
 
             override fun onQueryTextChange(newText: String?): Boolean {
                 return if (newText != null) {
-                    val horoscopeList = HoroscopeProvider.getAllHoroscopesByIdStartingWithTheGivenInput(newText)
+                    val horoscopeList =
+                        HoroscopeProvider.getAllHoroscopesByIdStartingWithTheGivenInput(newText)
                     adapter.updateDataSet(horoscopeList)
                     true
                 } else false
@@ -56,10 +63,10 @@ class MainActivity : AppCompatActivity() {
         return super.onCreateOptionsMenu(menu)
     }
     fun navigateToDailyHoroscope(horoscope: Horoscope) {
-        val intent = Intent(this, DailyHoroscope::class.java)
-        //here we are assigning to the static constant of DailyHoroscope
+        val intent = Intent(this, DailyHoroscopeActivity::class.java)
+        //here we are assigning to the static constant of DailyHoroscopeActivity
         //class the name on which the value of the horoscope id will be passed
-        intent.putExtra(DailyHoroscope.EXTRA_ID, horoscope.id)
+        intent.putExtra(DailyHoroscopeActivity.EXTRA_ID, horoscope.id)
         startActivity(intent)
     }
 }

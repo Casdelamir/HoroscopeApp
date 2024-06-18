@@ -1,4 +1,7 @@
-package com.example.horoscopeapp
+package com.example.horoscopeapp.data
+
+import com.example.horoscopeapp.R
+
 //singleton class (have only one instance)
 class HoroscopeProvider {
     //all variables and functions in companion object are static
