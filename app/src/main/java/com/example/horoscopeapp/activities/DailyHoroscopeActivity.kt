@@ -1,5 +1,6 @@
 package com.example.horoscopeapp.activities
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -26,6 +27,7 @@ class DailyHoroscopeActivity : AppCompatActivity() {
     lateinit var id: String
     lateinit var favorite: String
     lateinit var favoriteImageButton: ImageButton
+    lateinit var horoscope: Horoscope
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -37,7 +39,7 @@ class DailyHoroscopeActivity : AppCompatActivity() {
 
         favoriteImageButton = findViewById(R.id.favorite_icon_button)
 
-        val horoscope: Horoscope = HoroscopeProvider.getHoroscopeById(id)
+        horoscope= HoroscopeProvider.getHoroscopeById(id)
 
         val imageView: ImageView = findViewById(R.id.daily_icon)
         val textView: TextView = findViewById(R.id.daily_name)
@@ -50,6 +52,10 @@ class DailyHoroscopeActivity : AppCompatActivity() {
         favoriteImageButton.setOnClickListener {
             setFavorite()
         }
+
+        supportActionBar?.setTitle(horoscope.name)
+        supportActionBar?.setSubtitle(horoscope.description)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
     fun setFavoriteIcons(id: String, imageResourceIcon: Int) {
         itemFavoriteMenu?.setIcon(imageResourceIcon)
@@ -80,12 +86,25 @@ class DailyHoroscopeActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when(item.itemId) {
+            //This is the arrow button in the action bar
+            android.R.id.home -> {
+                finish()
+                true
+            }
             R.id.menu_favorite -> {
                 setFavorite()
                 Log.i("MENU", "Favorite is selected")
                 true
             }
             R.id.menu_share -> {
+//              Implements share with other apps
+                val sendIntent = Intent()
+                sendIntent.setAction(Intent.ACTION_SEND)
+                sendIntent.putExtra(Intent.EXTRA_TEXT, getString(horoscope.name))
+                sendIntent.setType("text/plain")
+
+                val shareIntent = Intent.createChooser(sendIntent, null)
+                startActivity(shareIntent)
                 Log.i("MENU", "Share is selected")
                 true
             }
