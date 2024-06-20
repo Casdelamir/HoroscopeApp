@@ -63,10 +63,10 @@ class MainActivity : AppCompatActivity() {
         return super.onCreateOptionsMenu(menu)
     }
     fun navigateToDailyHoroscope(horoscope: Horoscope) {
-        val intent = Intent(this, DailyHoroscopeActivity::class.java)
-        //here we are assigning to the static constant of DailyHoroscopeActivity
+        val intent = Intent(this, PredictionHoroscopeActivity::class.java)
+        //here we are assigning to the static constant of PredictionHoroscopeActivity
         //class the name on which the value of the horoscope id will be passed
-        intent.putExtra(DailyHoroscopeActivity.EXTRA_ID, horoscope.id)
+        intent.putExtra(PredictionHoroscopeActivity.EXTRA_ID, horoscope.id)
         startActivity(intent)
     }
 }
