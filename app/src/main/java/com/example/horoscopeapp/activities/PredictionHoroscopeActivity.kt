@@ -132,6 +132,7 @@ class PredictionHoroscopeActivity : AppCompatActivity() {
     }
 
     fun getHoroscopePrediction(date: String) {
+        dailyPredicton.visibility = View.GONE
         progressBar.visibility = View.VISIBLE
         // Llamada en hilo secundario
         CoroutineScope(Dispatchers.IO).launch {
@@ -151,6 +152,7 @@ class PredictionHoroscopeActivity : AppCompatActivity() {
                 runOnUiThread {
                     dailyPredicton.text = data
                     progressBar.visibility = View.GONE
+                    dailyPredicton.visibility = View.VISIBLE
                 }
                 Log.i("HTTP", "Response Code :: $responseCode")
             } catch (ex: Exception) {
